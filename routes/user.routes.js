@@ -26,8 +26,11 @@ router.get('/login',async(req,res)=>{
  const {email, phone , password} = req.body
  const foundUser = await userModel.findOne({$or:[{email}, {phone}]})
   if(foundUser){
-  const comparePassword = await bcrypt.compare(password , foundUser.password)
-  res.send(comparePassword)
+  const PasswordisCorrect = await bcrypt.compare(password , foundUser.password)
+   if (PasswordisCorrect){
+      res.send(PasswordisCorrect);
+  } 
+      //   jwt
  }
  
 })
