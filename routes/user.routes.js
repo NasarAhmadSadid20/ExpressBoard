@@ -28,9 +28,11 @@ router.get('/login',async(req,res)=>{
   if(foundUser){
   const PasswordisCorrect = await bcrypt.compare(password , foundUser.password)
    if (PasswordisCorrect){
-      res.send(PasswordisCorrect);
-  } 
-      //   jwt
+      // jwt 
+      const token =  jwt.sign({_id : foundUser._id , name: foundUser.name},'primary_key')
+      res.send(token);
+  } else res.send('your password is not match')
+      
  }
  
 })
