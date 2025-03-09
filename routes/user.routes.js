@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 const userModel = require('../models/user.models')
 
 
@@ -19,7 +20,7 @@ router.post('/register', async (req,res)=>{
    
    const foundUser =  await userModel.findOne({$or:[{email}, {phone}]})
    if(foundUser){
-      return res.json('user already exists')
+      return res.json('کاربر از قبل وجود دارد ! ')
    }
     req.body.password = await cryptPassword(req.body.password);
       const newUser = new userModel(req.body);
@@ -35,7 +36,10 @@ router.post('/login',async(req,res)=>{
   if(foundUser){
   const PasswordisCorrect = await bcrypt.compare(password , foundUser.password)
    if (PasswordisCorrect){ 
-      const token =  jwt.sign({_id : foundUser._id , name: foundUser.name},'primary_key')
+      const token = jwt.sign(
+        { _id: foundUser._id, name: foundUser.name },
+        process.env.PRIMARY_KEY
+      );
       res.send(token);
   } else res.send('your password is not match')
       

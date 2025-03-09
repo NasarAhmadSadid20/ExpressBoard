@@ -1,0 +1,25 @@
+app.post("/register", async (req, res) => {
+    const { username, email, phone, password } = req.body;
+
+    // بررسی قدرت رمز عبور
+    const passwordStrength = zxcvbn(password);
+    if (passwordStrength.score < 3) {
+        return res.status(400).json({
+            message: "رمز عبور ضعیف است. لطفاً رمز قوی‌تری انتخاب کنید.",
+            suggestions: passwordStrength.feedback.suggestions
+        });
+    }
+
+    // بررسی تکراری نبودن کاربر
+    const foundUser = await User.findOne({ $or: [{ email }, { phone }] });
+    if (foundUser) {
+        return res.status(400).json({ message: "کاربر از قبل وجود دارد." });
+    }
+
+    // هش کردن و ذخیره رمز عبور
+    const hashedPassword = await cryptPassword(password);
+    const newUser = new User({ username, email, phone, password: hashedPassword });
+    await newUser.save();
+
+    res.status(201).json({ message: "ثبت‌نام موفقیت‌آمیز بود!" });
+});
