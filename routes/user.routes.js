@@ -3,15 +3,12 @@ const router = express.Router()
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-
 const userModel = require('../models/user.models')
 
-
-// hash password 
-async function cryptPassword(password){
-  const salt = await bcrypt.genSalt(10)
-  const hash = await bcrypt.hash(password, salt)
-   return hash
+async function cryptPassword(password) {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
 }
     
 // profile
@@ -20,31 +17,41 @@ router.get('/profile',inLoggedin, (req,res)=>{
 
 })
 // register users
-      
-router.post('/register', async (req,res)=>{
-   const {email, phone} = req.body
+        
+router.post('/register',async  (req,res)=>{
+   const {email, phone , name , password} = req.body
    
    const foundUser =  await userModel.findOne({$or:[{email}, {phone}]})
    if(foundUser){
       return res.json('کاربر از قبل وجود دارد ! ')
    }
-    req.body.password = await cryptPassword(req.body.password);
-      const newUser = new userModel(req.body);
-      await newUser.save(); 
-      const token = jwt.sign(
-        { _id: newUser._id, email: newUser.email },
+    bcrypt.genSalt(10,(err,salt)=>{
+      bcrypt.hash(password,salt, async (err,hash)=>{
+        const newUser = await userModel.create({
+          email ,
+          name  ,
+          phone ,
+          password: hash
+        })
+
+      })
+      let token = jwt.sign(
+        { email: email, userId: userModel._id },
         process.env.PRIMARY_KEY
       );
-      res.cookie("token",token)
+      res.cookie("token",token) 
       res.json({msg: 'Your register went succesfully'})
       
+    })
 
 })   
-   
+// hash password 
+
+    
 // login users
 router.post('/login',async(req,res)=>{
- const {email, phone , password} = req.body
- const foundUser = await userModel.findOne({$or:[{email}, {phone}]})
+ const {email , password} = req.body
+ const foundUser = await userModel.findOne({$or:[{email}]})
   if(foundUser){
   const PasswordisCorrect = await bcrypt.compare(password , foundUser.password)
    if (PasswordisCorrect){ 
@@ -58,7 +65,7 @@ router.post('/login',async(req,res)=>{
   } else res.json({ msg: "your password is not match" });
       
  }else{
-   res.json({msg: 'your email in not exists'})
+   res.render('register')
  }
  
 })
@@ -81,6 +88,9 @@ function inLoggedin(req,res,next){
 
 
 }
+router.get('/login',(req,res)=>{
+  res.render('login')
+})
 
 
 module.exports = router
