@@ -34,6 +34,7 @@ const register = async (req, res) => {
 
 // login
 const login = async (req, res) => {
+  let errors =[]
   const { email, password } = req.body;
   const foundUser = await userModel.findOne({ $or: [{ email }] });
   if (foundUser) {
@@ -50,7 +51,8 @@ const login = async (req, res) => {
       res.json({ msg: "your login went succsefuly" });
     } else res.json({ msg: "your password is not match" });
   } else {
-    res.render("register");
+    errors.push({msg: "شما در داخل دیتابیس ثبت نشده اید !"})
+    res.render("login",{ errors});
   }
 }; 
 

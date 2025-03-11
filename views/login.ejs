@@ -15,6 +15,11 @@
     </style>
 <body class="login-page bg-body-secondary app-loaded">
     <div class="login-box" style="width: 350px;">
+      <div class="errors"> <% if(typeof  errors!= "undefined"){ %>
+       <% errors.forEach(element => { %>
+       <p> <%= element.msg %> </p>
+      <% }); }%>
+      </div>
       <div class="login-logo">
    
       </div>
@@ -66,7 +71,14 @@
     
       <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
    
-  
+  <script>
+    const errors = document.querySelector('.errors')
+    setInterval(() => {
+      if(errors){
+        errors.style.display = 'none'
+      }
+    }, 2000);
+  </script>
   
 
 </body>

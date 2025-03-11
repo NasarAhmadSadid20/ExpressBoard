@@ -15,7 +15,7 @@ app.use('/',require('./routes/user.routes'))
 app.get("/", (req, res) => {
   res.render("register");
 });
-  
+     
     
        
 mongoose
