@@ -71,8 +71,12 @@ const getLogin = (req, res) => {
 
 // profile
 const profile = (req, res) => {
-  res.json(req.user);
+  res.render('profile')
 };
+// post
+const postProile =(req,res)=>{
+  res.render('mypost')
+}
 
 
-module.exports = {register,login,logout,getLogin,profile};
+module.exports = { register, login, logout, getLogin, profile, postProile };

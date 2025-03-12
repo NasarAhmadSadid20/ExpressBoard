@@ -2,7 +2,14 @@ const express = require("express");
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 const userModel = require("../models/user.models");
-const {register,login,logout,getLogin,profile} = require('../controllers/user.controller') 
+const {
+  register,
+  login,
+  logout,
+  getLogin,
+  profile,
+  postProile,
+} = require("../controllers/user.controller"); 
 
 
   
@@ -33,5 +40,7 @@ function inLoggedin(req, res, next) {
       .json({ msg: "توکن نامعتبر است، لطفاً دوباره لاگین کنید!" });
   }
 }
+
+router.post("/post-profile",inLoggedin, postProile);
 
 module.exports = router;
