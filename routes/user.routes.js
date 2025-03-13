@@ -8,12 +8,11 @@ const {
   logout,
   getLogin,
   profile,
-  postProile,
 } = require("../controllers/user.controller"); 
 
 
   
-router.get("/profile", inLoggedin, profile);
+router.get("/profile",inLoggedin, profile);
 
 router.post("/register", register);
 
@@ -41,6 +40,5 @@ function inLoggedin(req, res, next) {
   }
 }
 
-router.post("/post-profile",inLoggedin, postProile);
 
 module.exports = router;

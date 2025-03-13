@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const userModel = require("../models/user.models");
+const postModel = require('../models/post.model')
 
 
 // register
@@ -69,14 +70,19 @@ const getLogin = (req, res) => {
 };
 
 
-// profile
-const profile = (req, res) => {
-  res.render('profile')
-};
+// // profile
+// const profile = (req, res) => {
+//   res.render('profile')
+// };
 // post
-const postProile =(req,res)=>{
+
+const profile  = async (req,res)=>{
+  let user = await  userModel.findOne({email : req.user.email})
+  if(user){
+    const {title, content} = req.body;
+  }
   res.render('mypost')
 }
 
 
-module.exports = { register, login, logout, getLogin, profile, postProile };
+module.exports = { register, login, logout, getLogin, profile };
