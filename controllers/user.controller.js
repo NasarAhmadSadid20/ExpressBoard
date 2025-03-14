@@ -70,19 +70,25 @@ const getLogin = (req, res) => {
 };
 
 
-// // profile
-// const profile = (req, res) => {
-//   res.render('profile')
-// };
-// post
 
 const profile  = async (req,res)=>{
-  let user = await  userModel.findOne({email : req.user.email})
-  if(user){
-    const {title, content} = req.body;
-  }
-  res.render('mypost')
+  const user = await userModel.findOne({ email: req.user.email }).populate('posts')
+  console.log(user.content)
+ res.render("profile", { user });
 }
 
+const post  = async (req,res)=>{
+  const user = await userModel.findOne({email: req.user.email})
+  let {content} = req.body
+ let post = await postModel.create({
+    user: user._id,
+    content
+  });
+  user.posts.push(post._id)
+  await user.save();
+  
+  res.redirect('/profile')
+}
+   
 
-module.exports = { register, login, logout, getLogin, profile };
+module.exports = { register, login, logout, getLogin, profile,post };

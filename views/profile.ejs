@@ -35,22 +35,33 @@
       .post-card {
         margin-bottom: 15px;
       }
+      .bg-light{
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .main1{
+        background-color: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.096);
+        border-radius: 5px;
+        padding: 20px;
+        height: 70vh;
+      }
+      .main2{
+        max-width: 500px;
+      }
+
     </style>
   </head>
   <body class="bg-light">
-    <div class="container mt-5">
-      <div class="row">
+    <div class="main1">
+       <div class="container mt-5">
+      <h1>سلام <%= user.name %> خشامدی </h1>
+      <div  class="row">
         <!-- فرم اضافه کردن پست جدید -->
-        <form action="/post-profile" method="post">
-          <div class="col-md-4">
+        <form action="/create-post" method="post">
+          <div class="col-md-5">
             <h4>ایجاد پست جدید</h4>
-            <input
-              name="title"
-              type="text"
-              id="postTitle"
-              class="form-control mb-2"
-              placeholder="عنوان پست"
-            />
             <textarea
               name="content"
               id="postContent"
@@ -68,6 +79,41 @@
         </form>
       </div>
     </div>
+    </div>
+
+    <style>
+      .main{
+        background-color: red;
+      }
+    
+ </style>
+
+
+
+
+
+
+ <div class="main2">
+  <% user.posts.forEach(element => { %>
+ <div class="card post-card" id="">
+      <img
+        src=""
+        class="card-img-top"
+        style="max-height: 200px; object-fit: cover"
+      />
+          <div class="card-body">
+        <p style="color: blue; background-color: rgba(0, 0, 0, 0.061); padding: 5px;" class="card-text"><%=user.email %></p>
+        <p class="card-text"><%=element.content %></p>
+        <button class="btn btn-warning btn-sm">ویرایش</button>
+        <button class="btn btn-danger btn-sm">حذف</button>
+      </div>
+
+      
+    </div>
+    <% }); %>
+
+ </div>
+ 
    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
