@@ -1,11 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پست‌های کاربران</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .post-container {
+            width: 60%;
+            margin: 20px auto;
+        }
+        .post {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .post h2 {
+            color: #333;
+        }
+        .post p {
+            color: #666;
+        }
+        .post .info {
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
 
-           <div class="main2">
-           <% if(typeof user != "undefiend"){ %>
-           <% post.posts.forEach(element => { %>
-           <div class="post-list">
-           <div class="post">
-           <img src="">
-           <p> <%=element.content %> </p>
-           </div>
-           </div>
-           <% })}; %>
+    <h1>تمام پست‌های کاربران</h1>
+    <div class="post-container">
+        <% post.forEach(user => { %> 
+            <% user.posts.reverse().forEach(post => { %>  
+                <div class="post">
+                    <h2><%= post.title %></h2>
+                    <p><%= post.content %></p>
+                    <p class="info">نوشته شده توسط <strong><%= user.name %></strong> در <%= new Date(post.createdAt).toLocaleString('fa-IR') %></p>
+                </div>
+            <% }) %>
+        <% }) %>
+    </div>
+
+</body>
+</html>
