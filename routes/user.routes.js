@@ -8,12 +8,14 @@ const {
   logout,
   getLogin,
   profile,
-  post
+  post,
+  AllPost
 } = require("../controllers/user.controller"); 
-
+   
 
   
 router.get("/profile",inLoggedin, profile);
+router.get("/allPost", AllPost);
 router.post ("/create-post", inLoggedin,post);
 router.post("/register", register);
 

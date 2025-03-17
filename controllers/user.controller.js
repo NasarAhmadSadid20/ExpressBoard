@@ -6,7 +6,7 @@ const userModel = require("../models/user.models");
 const postModel = require('../models/post.model')
 
 
-// register
+  // register
 const register = async (req, res) => {
   const { email, phone, name, password } = req.body;
 
@@ -28,12 +28,12 @@ const register = async (req, res) => {
       process.env.PRIMARY_KEY
     );
     res.cookie("token", token);
-    res.json({ msg: "Your register went succesfully" });
+    res.redirect('profile')
   });
 };
 
-
-// login
+  
+  // login
 const login = async (req, res) => {
   let errors =[]
   const { email, password } = req.body;
@@ -49,7 +49,7 @@ const login = async (req, res) => {
         process.env.PRIMARY_KEY
       );
       res.cookie("token", token);
-      res.json({ msg: "your login went succsefuly" });
+      res.redirect('profile')
     } else res.json({ msg: "your password is not match" });
   } else {
     errors.push({msg: "شما در داخل دیتابیس ثبت نشده اید !"})
@@ -57,26 +57,26 @@ const login = async (req, res) => {
   }
 }; 
 
-// logout
+  // logout
 const logout = (req, res) => {
   res.cookie("token", "");
   res.json({ msg: "token went remove" });
 };
 
 
-// getLogin
+  // getLogin
 const getLogin = (req, res) => {
   res.render("login");
 };
 
 
-
+  // profile
 const profile  = async (req,res)=>{
   const user = await userModel.findOne({ email: req.user.email }).populate('posts')
-  console.log(user.content)
  res.render("profile", { user });
-}
+};
 
+  //post 
 const post  = async (req,res)=>{
   const user = await userModel.findOne({email: req.user.email})
   let {content} = req.body
@@ -88,7 +88,15 @@ const post  = async (req,res)=>{
   await user.save();
   
   res.redirect('/profile')
-}
+};
+ 
    
 
-module.exports = { register, login, logout, getLogin, profile,post };
+  // show all post for client 
+const AllPost = async (req,res)=>{
+ const post = await userModel.find().populate('posts')
+ res.render("home", { post });
+}
+
+
+module.exports = { register, login, logout, getLogin, profile, post, AllPost };
