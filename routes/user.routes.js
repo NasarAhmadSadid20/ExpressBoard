@@ -14,7 +14,7 @@ const {
   AllPost,
   
 } = require("../controllers/user.controller"); 
-   
+  
   
   
 router.get("/profile",inLoggedin, profile);

@@ -3,10 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const userModel = require("../models/user.models");
-const postModel = require('../models/post.model')
+const postModel = require("../models/post.model");
 
-
-  // register
+// register
 const register = async (req, res) => {
   const { email, phone, name, password } = req.body;
 
@@ -28,14 +27,13 @@ const register = async (req, res) => {
       process.env.PRIMARY_KEY
     );
     res.cookie("token", token);
-    res.redirect('profile')
+    res.redirect("profile");
   });
 };
 
-  
-  // login
+// login
 const login = async (req, res) => {
-  let errors =[]
+  let errors = [];
   const { email, password } = req.body;
   const foundUser = await userModel.findOne({ $or: [{ email }] });
   if (foundUser) {
@@ -49,61 +47,71 @@ const login = async (req, res) => {
         process.env.PRIMARY_KEY
       );
       res.cookie("token", token);
-      res.redirect('profile')
+      res.redirect("profile");
     } else res.json({ msg: "your password is not match" });
   } else {
-    errors.push({msg: "شما در داخل دیتابیس ثبت نشده اید !"})
-    res.render("login",{ errors});
+    errors.push({ msg: "شما در داخل دیتابیس ثبت نشده اید !" });
+    res.render("login", { errors });
   }
-}; 
+};
 
-  // logout
+// logout
 const logout = (req, res) => {
   res.cookie("token", "");
   res.json({ msg: "token went remove" });
 };
 
-
-  // getLogin
+// getLogin
 const getLogin = (req, res) => {
   res.render("login");
 };
 
-
-  // profile
-const profile  = async (req,res)=>{
-  const user = await userModel.findOne({ email: req.user.email }).populate('posts')
- res.render("AllPost", { user });
+// profile
+const profile = async (req, res) => {
+  const user = await userModel
+    .findOne({ email: req.user.email })
+    .populate("posts");
+  res.render("AllPost", { user });
 };
 
-  //post 
-const post  =  async (req,res)=>{
-  const user = await userModel.findOne({email: req.user.email})
-  let { content } = req.body;
-  let { newImagePost } = `/image/${req.file.filename}`;
- let post = await postModel.create({
-   user: user._id,
-   content,
-   newImagePost
- });
-  user.posts.push(post._id)
-  await user.save();
-  
-  res.redirect('/profile')
-};
- 
-   
+//post
+const post = async (req, res) => {
+  try {
+    console.log("Uploaded File:", req.file);
 
-  // show all post for client 
-const AllPost = async (req,res)=>{
- const post = await userModel.find().populate('posts')
- res.render("home", { post });
-}
+    const user = await userModel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "کاربر یافت نشد" });
+    }
+
+    let { content } = req.body;
+    let newImagePost = req.file ? `/image/${req.file.filename}` : null;
+
+    let newPost = await postModel.create({
+      user: user._id,
+      content,
+      newImagePost,
+    });
+
+    user.posts.push(newPost._id);
+    await user.save();
+
+    res.redirect("/profile");
+  } catch (error) {
+    console.error("Error in post creation:", error);
+    res.status(500).json({ message: "خطای سرور رخ داد" });
+  }
+};
+
+// show all post for client
+const AllPost = async (req, res) => {
+  const post = await userModel.find().populate("posts");
+  res.render("home", { post });
+};
 
 // const newPost = async (req,res)=>{
 //   res.render("AllPost")
 // }
-
 
 module.exports = {
   register,
@@ -113,5 +121,4 @@ module.exports = {
   profile,
   post,
   AllPost,
-
 };

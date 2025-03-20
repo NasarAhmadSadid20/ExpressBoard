@@ -110,7 +110,7 @@
           <div id="modal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <form action="/create-post" method="post">
+              <form action="/create-post" method="post" enctype="multipart/form-data">
                 <h2
                   style="
                     text-align: center;
@@ -144,19 +144,21 @@
           </div>
         </div>
         <div class="postMain">
-          <% user.posts.reverse().forEach((element)=> { %>
+         <% user.posts.reverse().forEach((element) => { %>
+  <div class="FristPost">
+    <div class="img">
+      <img src="/Images/my-photo.jpg" alt="User Profile" />
+    </div>
+    <h3><%= user.name %></h3>
+    <p><%= element.content %></p>
 
-          <div class="FristPost">
-            <div class="img">
-              <img src="/Images/my-photo.jpg" alt="" />
-            </div>
-            <h3><%= user.name %></h3>
-            <p><%= element.content %></p>
-            <img src="<%=element.newImagePost %>" alt="" />
-          </div>
-          <hr />
+    <% if (element.newImagePost) { %>
+      <img src="<%= element.newImagePost %>" alt="Post Image" />
+    <% } %>
 
-          <% }); %>
+  </div>
+  <hr>
+<% }); %>
         </div>
       </div>
       <div class="right"></div>
