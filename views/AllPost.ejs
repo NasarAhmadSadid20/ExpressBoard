@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Style.css" />
+    <!-- font Awesime -->
+    <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.min.css" />
+  </head>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(33, 3, 30, 0.788);
+      z-index: 5;
+      border-radius: 20px;
+    }
+    .modal-content {
+      background: white;
+      /* padding: 20px; */
+      width: 400px;
+      height: auto;
+      margin: 100px auto;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+    .close {
+      cursor: pointer;
+      float: right;
+      position: absolute;
+      right: 20px;
+      top: 5px;
+      font-size: 40px;
+    }
+    #newpostInput {
+      width: 300px;
+      height: 50px;
+      text-align: right;
+      border-radius: 0;
+      overflow: scroll;
+    }
+    #submitPost {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 100px;
+      border-radius: 5px;
+      text-align: center;
+      padding: 0;
+      height: 40px;
+      background: linear-gradient(
+        10deg,
+        rgb(255, 18, 219),
+        rgba(9, 53, 227, 0.377)
+      );
+      color: white;
+      font-size: 16px;
+    }
+    #chooseImage {
+      border: none;
+      padding: 0;
+      margin: 0;
+      width: 200px;
+      height: 50px;
+      border-radius: 0;
+      text-align: center;
+    }
+    .inputs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      align-items: end;
+      gap: 10px;
+    }
+  </style>
+
+  <body style="background-color: rgba(249, 65, 255, 0.141)">
+    <div class="navabr">
+      <div class="homeIcon"><i class="fas fa-home"></i> <span>Home</span></div>
+      <div class="myblogIcon">
+        <i class="fas fa-user"></i><span>MyBlog</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="left">
+        <div class="header_photo"></div>
+        <div class="Bio_photo">
+          <img src="/Images/nasar.JPEG" alt="" />
+        </div>
+        <h2><% user.name %></h2>
+        <p>Herat, Herat Province</p>
+
+        <h3>Self Employed</h3>
+      </div>
+
+      <div class="center">
+        <div class="serch">
+          <input id="newPostBtn" type="text" placeholder="Start a post" />
+          <div id="modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <form action="/create-post" method="post">
+                <h2
+                  style="
+                    text-align: center;
+                    margin-bottom: 10px;
+                    margin-top: 20px;
+                  "
+                >
+                  پست جدید
+                </h2>
+                <div class="inputs">
+                  <input
+                    id="newpostInput"
+                    type="text"
+                    name="content"
+                    placeholder="...متن خودرا بنوسید"
+                  />
+                  <input
+                    id="chooseImage"
+                    name="newImagePost"
+                    type="file"
+                    accept="image/*"
+                  />
+                </div>
+                <input id="submitPost" value="ثبت پست" type="submit" />
+              </form>
+            </div>
+          </div>
+
+          <div class="photo">
+            <img src="/Images/my-photo.jpg" alt="" />
+          </div>
+        </div>
+        <div class="postMain">
+          <% user.posts.reverse().forEach((element)=> { %>
+
+          <div class="FristPost">
+            <div class="img">
+              <img src="/Images/my-photo.jpg" alt="" />
+            </div>
+            <h3><%= user.name %></h3>
+            <p><%= element.content %></p>
+            <img src="<%=element.newImagePost %>" alt="" />
+          </div>
+          <hr />
+
+          <% }); %>
+        </div>
+      </div>
+      <div class="right"></div>
+    </div>
+
+    <script>
+      const modal = document.getElementById("modal");
+      const btn = document.getElementById("newPostBtn");
+      const close = document.querySelector(".close");
+
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+      close.onclick = function () {
+        modal.style.display = "none";
+      };
+      window.onclick = function (event) {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
