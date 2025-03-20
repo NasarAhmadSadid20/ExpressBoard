@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require('jsonwebtoken')
+const multer = require('multer')
+const upload = multer({ dest: "public/image/" });
 const userModel = require("../models/user.models");
 const {
   register,
@@ -9,14 +11,15 @@ const {
   getLogin,
   profile,
   post,
-  AllPost
+  AllPost,
+  
 } = require("../controllers/user.controller"); 
    
-
+  
   
 router.get("/profile",inLoggedin, profile);
-router.get("/allPost", AllPost);
-router.post ("/create-post", inLoggedin,post);
+router.get("/allPost",inLoggedin, AllPost);
+router.post("/create-post", inLoggedin, upload.single('newImagePost'), post);
 router.post("/register", register);
 
 router.post("/login", login);
@@ -24,6 +27,8 @@ router.post("/login", login);
 router.get("/logout", logout);
 
 router.get("/login", getLogin);
+
+// router.get("/newPost",newPost);
 
 function inLoggedin(req, res, next) {
   const token = req.cookies.token;
@@ -42,6 +47,7 @@ function inLoggedin(req, res, next) {
       .json({ msg: "توکن نامعتبر است، لطفاً دوباره لاگین کنید!" });
   }
 }
+
 
 
 module.exports = router;

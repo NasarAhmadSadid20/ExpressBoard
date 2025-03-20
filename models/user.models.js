@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema(
       maxLength: [120,"رمز شما باید از 120 حرف بیشتر نباشد"],
       required:true,
     },
+    personImage:{
+      type:String,
+    },
     posts:[{
       type:mongoose.Schema.Types.ObjectId, ref: "post"
     }]

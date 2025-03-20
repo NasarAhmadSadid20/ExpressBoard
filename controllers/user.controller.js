@@ -73,17 +73,19 @@ const getLogin = (req, res) => {
   // profile
 const profile  = async (req,res)=>{
   const user = await userModel.findOne({ email: req.user.email }).populate('posts')
- res.render("profile", { user });
+ res.render("AllPost", { user });
 };
 
   //post 
-const post  = async (req,res)=>{
+const post  =  async (req,res)=>{
   const user = await userModel.findOne({email: req.user.email})
-  let {content} = req.body
+  let { content } = req.body;
+  let { newImagePost } = `/image/${req.file.filename}`;
  let post = await postModel.create({
-    user: user._id,
-    content
-  });
+   user: user._id,
+   content,
+   newImagePost
+ });
   user.posts.push(post._id)
   await user.save();
   
@@ -98,5 +100,18 @@ const AllPost = async (req,res)=>{
  res.render("home", { post });
 }
 
+// const newPost = async (req,res)=>{
+//   res.render("AllPost")
+// }
 
-module.exports = { register, login, logout, getLogin, profile, post, AllPost };
+
+module.exports = {
+  register,
+  login,
+  logout,
+  getLogin,
+  profile,
+  post,
+  AllPost,
+
+};
