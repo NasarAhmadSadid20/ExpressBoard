@@ -7,7 +7,9 @@ const postModel = require("../models/post.model");
 
 // register
 const register = async (req, res) => {
-  const { email, phone, name, password } = req.body;
+  const { email, phone, name, password} = req.body;
+  const photo = `/image/${req.file.filename}`;
+  console.log(photo)
 
   const foundUser = await userModel.findOne({ $or: [{ email }, { phone }] });
   if (foundUser) {
@@ -19,6 +21,7 @@ const register = async (req, res) => {
         email,
         name,
         phone,
+        profPhoto:photo,
         password: hash,
       });
     });
@@ -27,7 +30,7 @@ const register = async (req, res) => {
       process.env.PRIMARY_KEY
     );
     res.cookie("token", token);
-    res.redirect("profile");
+    res.render("login");
   });
 };
 
@@ -72,8 +75,9 @@ const profile = async (req, res) => {
     .findOne({ email: req.user.email })
     .populate("posts");
   res.render("AllPost", { user });
+  console.log(user)
 };
-
+ 
 //post
 const post = async (req, res) => {
   try {

@@ -10,7 +10,7 @@ const {
   logout,
   getLogin,
   profile,
-  post,
+  post,   
   AllPost,
   
 } = require("../controllers/user.controller"); 
@@ -20,7 +20,7 @@ const {
 router.get("/profile",inLoggedin, profile);
 router.get("/allPost",inLoggedin, AllPost);
 router.post("/create-post", inLoggedin, upload.single('newImagePost'), post);
-router.post("/register", register);
+router.post("/register", upload.single("profPhoto"), register);
 
 router.post("/login", login);
 

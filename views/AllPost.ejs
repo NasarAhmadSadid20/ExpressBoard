@@ -96,9 +96,19 @@
       <div class="left">
         <div class="header_photo"></div>
         <div class="Bio_photo">
-          <img src="/Images/nasar.JPEG" alt="" />
+          <img src="<%= user.profPhoto %>" alt="" />
         </div>
-        <h2><%= user.name %></h2>
+        <div style="display: flex; justify-content: space-between">
+          <h2><%= user.name %></h2>
+          <!-- <form action="/take-photo">
+            <label style="margin-left: 50px" for="photo">
+              <img
+                style="width: 25px"
+                src="/icon/photo-camera (1).png"
+                alt="" /></label
+            ><input id="photo" style="opacity: 0" type="file" />
+          </form> -->
+        </div>
         <p>Herat, Herat Province</p>
 
         <h3>Self Employed</h3>
@@ -110,7 +120,11 @@
           <div id="modal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <form action="/create-post" method="post" enctype="multipart/form-data">
+              <form
+                action="/create-post"
+                method="post"
+                enctype="multipart/form-data"
+              >
                 <h2
                   style="
                     text-align: center;
@@ -140,25 +154,24 @@
           </div>
 
           <div class="photo">
-            <img src="/Images/my-photo.jpg" alt="" />
+            <img src="<%= user.profPhoto %>" alt="aaa" />
           </div>
         </div>
         <div class="postMain">
-         <% user.posts.reverse().forEach((element) => { %>
-  <div class="FristPost">
-    <div class="img">
-      <img src="/Images/my-photo.jpg" alt="User Profile" />
-    </div>
-    <h3><%= user.name %></h3>
-    <p><%= element.content %></p>
+          <% user.posts.reverse().forEach((element) => { %>
+          <div class="FristPost">
+            <div class="img">
+              <img src="<%= user.profPhoto %>" alt="hello" />
+            </div>
+            <h3><%= user.name %></h3>
+            <p><%= element.content %></p>
 
-    <% if (element.newImagePost) { %>
-      <img src="<%= element.newImagePost %>" alt="Post Image" />
-    <% } %>
-
-  </div>
-  <hr>
-<% }); %>
+            <% if (element.newImagePost) { %>
+            <img src="<%= element.newImagePost %>" alt="Post Image" />
+            <% } %>
+          </div>
+          <hr />
+          <% }); %>
         </div>
       </div>
       <div class="right"></div>

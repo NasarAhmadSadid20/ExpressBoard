@@ -1,54 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bootstrap-5.0.2-dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.min.css" />
+
     <title>Document</title>
     <style>
-        body{
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .register-box{
-            direction: rtl;
-        }
-        
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .register-box {
+        direction: rtl;
+      }
     </style>
-</head>
-<body>
-    
-<div class="register-box" style="width: 350px;">
-      <div class="register-logo">
-        
-      </div>
+  </head>
+  <body>
+    <div class="register-box" style="width: 350px">
+      <div class="register-logo"></div>
       <!-- /.register-logo -->
       <div class="card">
         <div class="card-body register-card-body">
-          <p class="register-box-msg">ثبت نام کنید !  </p>
-          <form action="/register" method="post">
+          <p class="register-box-msg">ثبت نام کنید !</p>
+          <form action="/register" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="اسم کامل ">
+              <input
+                name="name"
+                type="text"
+                class="form-control"
+                placeholder="اسم کامل "
+              />
             </div>
             <div class="input-group mb-3">
-              <input name="email" type="email" class="form-control" placeholder="ایمیل">
-            
+              <input
+                name="email"
+                type="email"
+                class="form-control"
+                placeholder="ایمیل"
+              />
             </div>
             <div class="input-group mb-3">
-              <input name="phone" type="number" class="form-control" placeholder="شماره تماس">
-            
+              <input
+                name="phone"
+                type="number"
+                class="form-control"
+                placeholder="شماره تماس"
+              />
             </div>
             <div class="input-group mb-3">
-              <input name="password" type="password" class="form-control" placeholder="پسورد">
-             
+              <input
+                name="password"
+                type="password"
+                class="form-control"
+                placeholder="پسورد"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <label for="photo">
+                عکس پروفایل خود را انتخاب کنید<i
+                  style="font-size: 25px; margin-right: 10px; cursor: pointer"
+                  class="fa fa-camera"
+                ></i
+              ></label>
+              <input
+                id="photo"
+                style="opacity: 0"
+                name="profPhoto"
+                type="file"
+                class="form-control"
+                placeholder="photo "
+              />
             </div>
             <!--begin::Row-->
             <div class="row">
-              <div class="col-8">
-               
-              </div>
+              <div class="col-8"></div>
               <!-- /.col -->
               <div class="col-4">
                 <div class="d-grid gap-2">
@@ -61,25 +91,36 @@
           </form>
           <div class="social-auth-links text-center mb-3 d-grid gap-2">
             <p>- یا -</p>
-            <a href="#" class="btn btn-primary" style="background-color: rgba(0, 85, 255, 0.381);">
-              <i style="color: black;" class="bi bi-facebook me-2"> ورود توسط فیسبوک</i>
+            <a
+              href="#"
+              class="btn btn-primary"
+              style="background-color: rgba(0, 85, 255, 0.381)"
+            >
+              <i style="color: black" class="bi bi-facebook me-2">
+                ورود توسط فیسبوک</i
+              >
             </a>
-            <a href="#" class="btn btn-danger" style="background-color: rgba(255, 0, 144, 0.221);">
-              <i style="color: black;" class="bi bi-google me-2"> ورود توسط گوگل</i>
+            <a
+              href="#"
+              class="btn btn-danger"
+              style="background-color: rgba(255, 0, 144, 0.221)"
+            >
+              <i style="color: black" class="bi bi-google me-2">
+                ورود توسط گوگل</i
+              >
             </a>
           </div>
           <!-- /.social-auth-links -->
           <p class="mb-0">
-            <a href="/login" class="text-center" style="text-decoration: none;"> قبلن ثبت نام کردم  </a>
+            <a href="/login" class="text-center" style="text-decoration: none">
+              قبلن ثبت نام کردم
+            </a>
           </p>
         </div>
         <!-- /.register-card-body -->
       </div>
     </div>
 
-
-
-
     <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>
