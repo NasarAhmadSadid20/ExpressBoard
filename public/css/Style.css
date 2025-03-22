@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(244, 244, 244);
+    background: linear-gradient(90deg, #FFF8EE 50%, #245336 50%)
 }
 
 
@@ -49,19 +49,20 @@ body {
 .navabr {
     width: 80%;
     height: 80px;
-    background-color: rgb(255, 255, 255);
+    background: linear-gradient(50deg, #245336 47.5%, #FFF8EE 45% );
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5%;
+    gap: 10%;
     margin-left: auto;
     margin-right: auto;
-    border-bottom: 1.7px solid rgba(44, 43, 43, 0.197);
     position: fixed;
     top: 0;
     right: 10%;
     left: 10%;
     z-index: 5;
+    color: #e18f5f;
+    border-radius: 0px 0px 20px 20px;
 
 
 }
@@ -80,9 +81,10 @@ span {
 .container .left {
     width: 25%;
     height: 500px;
-    background-color: #ffffff;
+    background: linear-gradient(145deg, #FFF8EE 50%, #245336 50%);
     transform: translateY(10px);
     border-radius: 10px;
+    box-shadow: 0px 0px 50px  rgba(0, 0, 0, 0.132);
     overflow: hidden;
 
 
@@ -93,15 +95,17 @@ span {
 
     height: 500px;
     transform: translateY(10px);
+    
 
 }
 
 .container .right {
     width: 25%;
     height: 500px;
-    background-color: #ffffff;
+    background-color: #FFF8EE;
     transform: translateY(10px);
     margin-right: 0;
+    border-radius: 10px;
 
 
 }
@@ -149,14 +153,16 @@ span {
 
 
 .postMain {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.642);
     height: auto;
+    backdrop-filter: blur(10px);
 }
 
 .header_photo {
     width: 100%;
     height: 100px;
-    background: linear-gradient(10deg , rgb(255, 18, 219), rgba(9, 53, 227, 0.377));
+    background: #FFF8EE;
+    border: 5px solid #e18f5f;
 }
 .header_photo img{
     width: 100%;
@@ -183,6 +189,7 @@ span {
     width: 100%;
 
 }
+
 
 .left h2,
 p,

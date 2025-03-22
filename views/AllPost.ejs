@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.min.css" />
   </head>
   <style>
+    ::-webkit-scrollbar{
+      width: 20px;
+      border-radius: 50px;
+    }
+    ::-webkit-scrollbar-track{
+      background-color: #FFF8EE;
+    }
+    ::-webkit-scrollbar-thumb{
+      background-color: #e18f5f;
+    }
+    #imgPost{
+      width: 100%;
+    }
     .modal {
       display: none;
       position: fixed;
@@ -44,10 +57,12 @@
     }
     #newpostInput {
       width: 300px;
-      height: 50px;
+      max-width: 300px;
+      padding: 10px;
+      height: auto;
       text-align: right;
       border-radius: 0;
-      overflow: scroll;
+      overflow-x: hidden;
     }
     #submitPost {
       margin-top: 20px;
@@ -84,11 +99,11 @@
     }
   </style>
 
-  <body style="background-color: rgba(249, 65, 255, 0.141)">
+  <body >
     <div class="navabr">
       <div class="homeIcon"><i class="fas fa-home"></i> <span>Home</span></div>
-      <div class="myblogIcon">
-        <i class="fas fa-user"></i><span>MyBlog</span>
+      <div class="myblogIcon" style="transform: translateX(-30px);">
+        <i style="color: #e18f5f; " class="fas fa-user"></i><span style="color: #e18f5f;">MyBlog</span>
       </div>
     </div>
 
@@ -134,13 +149,14 @@
                 >
                   پست جدید
                 </h2>
+               
                 <div class="inputs">
-                  <input
+                  <textarea
                     id="newpostInput"
                     type="text"
                     name="content"
                     placeholder="...متن خودرا بنوسید"
-                  />
+                  ></textarea>
                   <input
                     id="chooseImage"
                     name="newImagePost"
@@ -167,7 +183,7 @@
             <p><%= element.content %></p>
 
             <% if (element.newImagePost) { %>
-            <img src="<%= element.newImagePost %>" alt="Post Image" />
+            <img id="imgPost" src="<%= element.newImagePost %>" alt="Post Image" />
             <% } %>
           </div>
           <hr />
