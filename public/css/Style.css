@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(90deg, #FFF8EE 50%, #245336 50%)
+    background: linear-gradient(90deg, #1F2131 50%, #1F2131 50%)
 }
 
 
@@ -49,7 +49,7 @@ body {
 .navabr {
     width: 80%;
     height: 80px;
-    background: linear-gradient(50deg, #245336 47.5%, #FFF8EE 45% );
+    background: linear-gradient(50deg, #1c08086c 47.5%, #1c08082f 45%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,12 +81,12 @@ span {
 .container .left {
     width: 25%;
     height: 500px;
-    background: linear-gradient(145deg, #FFF8EE 50%, #245336 50%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.299) 50%, rgba(0, 0, 0, 0.299) 50%);
     transform: translateY(10px);
     border-radius: 10px;
     box-shadow: 0px 0px 50px  rgba(0, 0, 0, 0.132);
     overflow: hidden;
-
+  
 
 }
 
@@ -102,7 +102,7 @@ span {
 .container .right {
     width: 25%;
     height: 500px;
-    background-color: #FFF8EE;
+    background-color: #02011f;
     transform: translateY(10px);
     margin-right: 0;
     border-radius: 10px;
@@ -161,21 +161,23 @@ span {
 .header_photo {
     width: 100%;
     height: 100px;
-    background: #FFF8EE;
-    border: 5px solid #e18f5f;
+    background: #0000004b;
+    border-bottom: 1px solid rgb(58, 57, 57);
 }
 .header_photo img{
     width: 100%;
 }
 .Bio_photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-top: -40px;
-    margin-left: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 10%;
+    margin-top: -30px;
+    margin-left: 10px;
     overflow: hidden;
+    margin-left: 50px;
+    z-index: 5;
     
-    border: 5px solid rgb(255, 255, 255);
+    
 
 }
 
