@@ -3,47 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پست‌های کاربران</title>
+    <title>پست‌های کاربران</title>   
+  <link rel="stylesheet" href="/fontawesome-free-6.6.0-web/css/all.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
+           background: #1F2131;
+            display: flex;
+            justify-content: center;
+            direction: rtl;
         }
         .post-container {
-            width: 60%;
-            margin: 20px auto;
+            width: 79%;
+            margin: 100px 0;
+          background-color: #1c08086c;
+            border-radius: 10px;
+            padding: 5px;
+            color: white;
         }
+
+
+        
+.navabr {
+    width: 80%;
+    height: 60px;
+    background: linear-gradient(50deg, #1c08086c 47.5%, #1c08082f 45% );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    top: 0;
+    right: 10%;
+    left: 10%;
+    z-index: 5;
+    color: #e2e2e2a3;
+    border-radius: 0px 0px 20px 20px;
+    backdrop-filter: blur(20px);
+
+
+}
+
+.homeIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.myblogIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+
+}
+
+
         .post {
-            background: white;
+            background: #1F2131;
             padding: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
+            display: flex;
+            flex-direction: column;
         }
-        .post h2 {
-            color: #333;
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
-        .post p {
-            color: #666;
+        .post-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: 10px;
         }
-        .post .info {
+        .post-header .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .post-header .user-info strong {
+            font-size: 16px;
+        }
+        .post-header .user-info span {
             font-size: 12px;
-            color: #888;
+            color: gray;
         }
+        .post-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .post-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .like-button {
+            color: #0073b1;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .like-button i {
+            margin-left: 5px;
+        }   
     </style>
 </head>
 <body>
+     <div class="navabr">
+      <div class="homeIcon"><i class="fas fa-home"></i> <span>Home</span></div>
+      <div class="myblogIcon" style="transform: translateX(-30px);">
+        <i  class="fas fa-user"></i><span >Profile</span>
+      </div>
+    </div>
 
-    <h1>تمام پست‌های کاربران</h1>
     <div class="post-container">
-        <% post.forEach(user => { %> 
-            <% user.posts.reverse().forEach(post => { %>  
+        <% post.reverse().forEach(user => { %> 
+            <% user.posts.forEach(post => { %>  
                 <div class="post">
-                    <h2><%= post.title %></h2>
-                    <p><%= post.content %></p>
-                    <p class="info">نوشته شده توسط <strong><%= user.name %></strong> در <%= new Date(post.createdAt).toLocaleString('fa-IR') %></p>
+                    <div class="post-header">
+                        <% if(user.profPhoto){ %>
+                        <img src="<%= user.profPhoto %>" alt="User Profile">
+                        <% }else{ %>
+                            <img src="/Images/profile.png" alt="User Profile">
+                            <% } %>
+                        <div class="user-info">
+                            <strong style="font-size: 25px;"><%= user.name %></strong>
+                           
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p style="font-size: 20px;"><%= post.content %></p>
+                        <% if (post.newImagePost) { %>
+                            <img src="<%= post.newImagePost %>" alt="Post Image">
+                        <% } %>
+                    </div>
+                    <div class="post-footer">
+                        <span class="like-button"><i class="fa fa-thumbs-up"></i> لایک</span>
+                    </div>
                 </div>
             <% }) %>
         <% }) %>
