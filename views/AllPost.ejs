@@ -10,14 +10,14 @@
   </head>
   <style>
     ::-webkit-scrollbar{
-      width: 20px;
-      border-radius: 50px;
+      width: 10px;
+      border-radius: 10px;
     }
     ::-webkit-scrollbar-track{
-      background-color: #FFF8EE;
+      background-color: #1c1c1c;
     }
     ::-webkit-scrollbar-thumb{
-      background-color: #e18f5f;
+      background-color: #cdcdcd;
     }
     #imgPost{
       width: 100%;
@@ -97,13 +97,18 @@
       align-items: end;
       gap: 10px;
     }
+
+    a{
+      text-decoration: none;
+      color: white;
+    }
   </style>
 
   <body >
     <div class="navabr">
-      <div class="homeIcon"><i class="fas fa-home"></i> <span>Home</span></div>
+      <div  class="homeIcon"><i style="font-size: 16px; margin-top: 5px;" class="fas fa-home"></i> <span ><a href="/AllPost">Home</a></span></div>
       <div class="myblogIcon" style="transform: translateX(-30px);">
-        <i style="color: #e18f5f; " class="fas fa-user"></i><span style="color: #e18f5f;">MyBlog</span>
+        <i style="font-size: 16px; margin-top: 5px;"  class="fas fa-user"></i><span ><a  href="/profile">Profile</a></span>
       </div>
     </div>
 
@@ -128,7 +133,7 @@
 
       <div class="center">
         <div class="serch">
-          <input id="newPostBtn" type="text" placeholder="Start a post" />
+          <input style="margin-right: 70px;" id="newPostBtn" type="text" placeholder="پست خودرا بنویسید " />
           <div id="modal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
@@ -176,8 +181,8 @@
             <div class="img">
               <img src="<%= user.profPhoto %>" alt="hello" />
             </div>
-            <h3><%= user.name %></h3>
-            <p><%= element.content %></p>
+            <h3 style="color: white;"><%= user.name %></h3>
+            <p style="color: white;"><%= element.content %></p>
 
             <% if (element.newImagePost) { %>
             <img id="imgPost" src="<%= element.newImagePost %>" alt="Post Image" />
